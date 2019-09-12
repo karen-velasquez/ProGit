@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Minibus;
+import com.example.demo.MinibusController;
+import com.example.demo.MinibusNotFoundException;
+
 @RestController
 class MinibusController {
 
@@ -43,6 +47,16 @@ class MinibusController {
       linkTo(methodOn(MinibusController.class).all()).withRel("minibuses"));
   }
  
+  @GetMapping("/employees/{id}")
+  Resource<Minibus> three(@PathVariable Long id) {
+
+    Minibus minibus = repository.findById(id)
+      .orElseThrow(() -> new MinibusNotFoundException(id));
+
+    return new Resource<>(minibus,
+      linkTo(methodOn(MinibusController.class).three(id)).withSelfRel(),
+      linkTo(methodOn(MinibusController.class).all()).withRel("employees"));
+  }
   @GetMapping("/minibuses/{id}")
   Minibus one(@PathVariable Long id) {
 
