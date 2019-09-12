@@ -2,6 +2,7 @@ package com.karen_velasquez.www.ProGit;
 
 import java.util.List;
 
+import org.springframework.hateoas.Resource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,5 +59,13 @@ class MinibusController {
   @DeleteMapping("/minibuses/{id}")
   void deleteMinibus(@PathVariable Long id) {
     repository.deleteById(id);
+  }
+  @GetMapping("/minibuses/{id}")
+  Resource<Minibus> two(@PathVariable Long id) {
+    Minibus minibus = repository.findById(id)
+      .orElseThrow(() -> new MinibusNotFoundException(id));
+    return new Resource<>(minibus,
+      linkTo(methodOn(MinibusController.class).two(id)).withSelfRel(),
+      linkTo(methodOn(MinibusController.class).all()).withRel("minibuses"));
   }
 }
