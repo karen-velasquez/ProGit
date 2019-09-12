@@ -18,5 +18,6 @@ import javax.persistence.Id;
 				this.numero=numero;
 				this.p_partida=p_partida;
 		}
+		
 
 }
