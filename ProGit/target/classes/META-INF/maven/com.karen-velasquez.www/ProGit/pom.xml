@@ -9,6 +9,11 @@
 
   <name>ProGit</name>
   <url>http://maven.apache.org</url>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.1.RELEASE</version>
+</parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,11 +31,16 @@
     <artifactId>hibernate-jpa-2.1-api</artifactId>
     <version>1.0.0.Final</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
 <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+  <dependency>
     <groupId>org.springframework.data</groupId>
     <artifactId>spring-data-jpa</artifactId>
     <version>2.0.1.RELEASE</version>
 </dependency>
+  
   </dependencies>
 </project>
