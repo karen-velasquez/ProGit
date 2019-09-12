@@ -11,29 +11,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-class EmployeeController {
+class MinibusController {
 
   private final MinibusRepository repository;
 
-  EmployeeController(MinibusRepository repository) {
+  MinibusController(MinibusRepository repository) {
     this.repository = repository;
   }
 
   // Aggregate root
 
-  @GetMapping("/employees")
+  @GetMapping("/minibuses")
   List<Minibus> all() {
     return repository.findAll();
   }
 
-  @PostMapping("/employees")
+  @PostMapping("/minibuses")
   Minibus newMinibus(@RequestBody Minibus newMinibus) {
     return repository.save(newMinibus);
   }
 
   // Single item
 
-  @GetMapping("/employees/{id}")
+  @GetMapping("/minibuses/{id}")
   Minibus one(@PathVariable Long id) {
 
     return repository.findById(id)
@@ -53,10 +53,10 @@ class EmployeeController {
         newMinibus.setId(id);
         return repository.save(newMinibus);
       });
-  }
+}
 
-  @DeleteMapping("/employees/{id}")
-  void deleteEmployee(@PathVariable Long id) {
+  @DeleteMapping("/minibuses/{id}")
+  void deleteMinibus(@PathVariable Long id) {
     repository.deleteById(id);
   }
 }
