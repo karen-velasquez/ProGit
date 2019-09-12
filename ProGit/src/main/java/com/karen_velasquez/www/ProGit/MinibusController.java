@@ -33,7 +33,16 @@ class MinibusController {
   }
 
   // Single item
-
+ 
+  @GetMapping("/minibuses/{id}")
+  Resource<Minibus> two(@PathVariable Long id) {
+    Minibus minibus = repository.findById(id)
+      .orElseThrow(() -> new MinibusNotFoundException(id));
+    return new Resource<>(minibus,
+      linkTo(methodOn(MinibusController.class).two(id)).withSelfRel(),
+      linkTo(methodOn(MinibusController.class).all()).withRel("minibuses"));
+  }
+ 
   @GetMapping("/minibuses/{id}")
   Minibus one(@PathVariable Long id) {
 
@@ -60,12 +69,5 @@ class MinibusController {
   void deleteMinibus(@PathVariable Long id) {
     repository.deleteById(id);
   }
-  @GetMapping("/minibuses/{id}")
-  Resource<Minibus> two(@PathVariable Long id) {
-    Minibus minibus = repository.findById(id)
-      .orElseThrow(() -> new MinibusNotFoundException(id));
-    return new Resource<>(minibus,
-      linkTo(methodOn(MinibusController.class).two(id)).withSelfRel(),
-      linkTo(methodOn(MinibusController.class).all()).withRel("minibuses"));
-  }
+  
 }
