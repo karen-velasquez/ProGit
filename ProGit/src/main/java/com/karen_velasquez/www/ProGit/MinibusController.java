@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Minibus;
-import com.example.demo.MinibusController;
-import com.example.demo.MinibusNotFoundException;
 
 @RestController
+@RequestMapping("minibuses")
 class MinibusController {
 
   private final MinibusRepository repository;
@@ -35,9 +34,10 @@ class MinibusController {
   Minibus newMinibus(@RequestBody Minibus newMinibus) {
     return repository.save(newMinibus);
   }
+ 
 
   // Single item
- 
+ /*
   @GetMapping("/minibuses/{id}")
   Resource<Minibus> two(@PathVariable Long id) {
     Minibus minibus = repository.findById(id)
@@ -46,8 +46,8 @@ class MinibusController {
       linkTo(methodOn(MinibusController.class).two(id)).withSelfRel(),
       linkTo(methodOn(MinibusController.class).all()).withRel("minibuses"));
   }
- 
-  @GetMapping("/employees/{id}")
+ */
+ /* @GetMapping("/minibuses/{id}")
   Resource<Minibus> three(@PathVariable Long id) {
 
     Minibus minibus = repository.findById(id)
@@ -55,8 +55,8 @@ class MinibusController {
 
     return new Resource<>(minibus,
       linkTo(methodOn(MinibusController.class).three(id)).withSelfRel(),
-      linkTo(methodOn(MinibusController.class).all()).withRel("employees"));
-  }
+      linkTo(methodOn(MinibusController.class).all()).withRel("minibuses"));
+  }*/
   @GetMapping("/minibuses/{id}")
   Minibus one(@PathVariable Long id) {
 
