@@ -22,6 +22,7 @@ class MinibusController {
   MinibusController(MinibusRepository repository) {
     this.repository = repository;
   }
+ 
 
   // Aggregate root
 
